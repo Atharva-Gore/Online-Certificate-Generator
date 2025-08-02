@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Certificate Generator</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>Online Certificate Generator</h1>
@@ -12,13 +13,24 @@
     <input type="text" id="name" placeholder="Recipient Name" required />
     <input type="text" id="course" placeholder="Course Title" required />
     <input type="date" id="date" required />
+    
+    <label for="templateSelect">Choose Template:</label>
+    <select id="templateSelect">
+      <option value="template1.png">Classic</option>
+      <option value="template2.png">Modern</option>
+    </select>
+    
     <button type="submit">Generate Certificate</button>
   </form>
 
-  <canvas id="certificateCanvas" width="1000" height="700"></canvas>
-  <br/>
-  <button id="downloadImage">Download as Image</button>
-  <button id="downloadPDF">Download as PDF</button>
+  <div class="canvas-wrapper">
+    <canvas id="certificateCanvas" width="1000" height="700"></canvas>
+  </div>
+
+  <div class="buttons">
+    <button id="downloadImage">Download as Image</button>
+    <button id="downloadPDF">Download as PDF</button>
+  </div>
 
   <script src="libs/jspdf.min.js"></script>
   <script src="script.js"></script>
