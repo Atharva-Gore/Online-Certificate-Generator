@@ -1,29 +1,38 @@
 const form = document.getElementById("certForm");
 const canvas = document.getElementById("certificateCanvas");
 const ctx = canvas.getContext("2d");
+const templateSelect = document.getElementById("templateSelect");
 
-form.addEventListener("submit", async (e) => {
+const positions = {
+  "template1.png": { nameY: 360, courseY: 420, dateY: 500 },
+  "template2.png": { nameY: 340, courseY: 410, dateY: 480 }
+};
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
   const course = document.getElementById("course").value;
   const date = document.getElementById("date").value;
+  const selectedTemplate = templateSelect.value;
 
   const bg = new Image();
-  bg.src = "templates/template1.png"; // Replace with your certificate template
+  bg.src = `templates/${selectedTemplate}`;
 
   bg.onload = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-    ctx.font = "40px serif";
+    const pos = positions[selectedTemplate] || positions["template1.png"];
+
+    ctx.font = "40px 'Poppins', sans-serif";
     ctx.fillStyle = "#000";
     ctx.textAlign = "center";
 
-    ctx.fillText(name, canvas.width / 2, 320);
-    ctx.font = "28px serif";
-    ctx.fillText(`for completing ${course}`, canvas.width / 2, 380);
-    ctx.fillText(`Date: ${date}`, canvas.width / 2, 440);
+    ctx.fillText(name, canvas.width / 2, pos.nameY);
+    ctx.font = "28px 'Poppins', sans-serif";
+    ctx.fillText(`for completing ${course}`, canvas.width / 2, pos.courseY);
+    ctx.fillText(`Date: ${date}`, canvas.width / 2, pos.dateY);
   };
 });
 
